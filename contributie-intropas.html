@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contributie & Intropas</title>
+<style>
+:root{--bg:#f7f2f2;--card:#ffffff;--text:#241416;--muted:#7a6265;--border:#e8d9da;--accent:#a3122b;--accent2:#0d7a72;--danger:#a3122b;--pill:#f1e4e5;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){--bg:#180f10;--card:#241618;--text:#f5e9ea;--muted:#b89ba0;--border:#3d2529;--accent:#e0405e;--accent2:#2bc4b6;--danger:#e0405e;--pill:#2e1c1f}}
+:root[data-theme="dark"]{--bg:#180f10;--card:#241618;--text:#f5e9ea;--muted:#b89ba0;--border:#3d2529;--accent:#e0405e;--accent2:#2bc4b6;--danger:#e0405e;--pill:#2e1c1f}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}h1{font-size:1.3rem;margin:4px 0 14px}.tabs{display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid var(--border)}.tab{padding:10px 12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-weight:600;font-size:.92rem}.tab.active{color:var(--accent);border-color:var(--accent)}.view{display:none}.view.active{display:block}.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;position:relative}.row{display:flex;justify-content:space-between;align-items:center;gap:10px}.name{font-weight:700}.sub{color:var(--muted);font-size:.85rem;margin-top:2px}.owed{color:var(--danger)}.paid{color:var(--accent2)}.lid{display:flex;align-items:center;gap:8px;cursor:pointer}.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:90}.modal-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;max-width:380px;width:100%;max-height:80vh;overflow-y:auto}.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}.modal-sub{color:var(--muted);font-size:.85rem;margin-bottom:14px}.month-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:.9rem}.month-row:last-child{border-bottom:none}.pw-box input{width:100%;margin-bottom:10px;text-align:center}.pw-box button.primary{width:100%;margin-bottom:8px}.del-x{background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;width:22px;flex-shrink:0}.lid-name{flex:1;text-align:center;font-weight:700}.lid-ctrl{flex-shrink:0;min-width:96px;display:flex;justify-content:flex-end}.stepper{display:flex;align-items:center;gap:6px}.stepper button{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--pill);color:var(--text);font-size:1rem;cursor:pointer}.pill{background:var(--pill);border-radius:8px;padding:3px 10px;font-weight:700;min-width:26px;text-align:center;font-size:.85rem}.readonly-amt{text-align:right}.readonly-amt .pill{display:block;margin-left:auto}.readonly-amt .sub{text-align:right}.anys-row{display:flex;align-items:center;justify-content:space-between;gap:10px}.beer-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}.beer-stack svg{width:34px;height:34px;flex-shrink:0}form.add{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}input,select{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 10px;font-size:.9rem}input[type=text]{flex:1;min-width:120px}input[type=number]{width:100px}button.primary{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer}button.link{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;text-decoration:underline}.summary{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}.stat{flex:1;min-width:110px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px}.stat .label{color:var(--muted);font-size:.76rem}.stat .val{font-size:1.15rem;font-weight:800;margin-top:2px}.period-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}.empty{color:var(--muted);text-align:center;padding:30px 0}.badge{font-size:.75rem;padding:2px 8px;border-radius:999px;font-weight:700}.badge.inkomst{background:#0d7a7222;color:var(--accent2)}.badge.uitgave{background:#a3122b22;color:var(--danger)}.gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}.gate-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;max-width:320px;width:100%;text-align:center}.gate-box h2{margin:0 0 6px;font-size:1.1rem}.gate-box p{color:var(--muted);font-size:.85rem;margin:0 0 14px}.gate-box input{width:100%;margin-bottom:10px;text-align:center}.gate-box button{width:100%}.gate-err{color:var(--danger);font-size:.8rem;min-height:1.2em;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="gate" id="site-gate">
+  <div class="gate-box">
+    <h2>Toegang vereist</h2>
+    <p>Vul het wachtwoord in om de site te openen.</p>
+    <form id="gate-form" action="javascript:void(0);">
+      <input type="password" id="gate-input" placeholder="Wachtwoord" autofocus>
+      <button class="primary" type="submit">Ontgrendelen</button>
+      <div class="gate-err" id="gate-err"></div>
+    </form>
+  </div>
+</div>
+<div id="app" style="display:none">
+<div class="row" style="margin-bottom:14px">
+  <h1 style="margin:0">Contributie & Intropas</h1>
+  <div><button class="link" id="sync-status">☁️ Laden...</button> <button class="link" id="admin-toggle">🔒 Beheerder</button></div>
+</div>
+<div class="tabs">
+  <div class="tab active" data-tab="leden">Leden</div>
+  <div class="tab" data-tab="anys">Anys</div>
+  <div class="tab" data-tab="intropas">Intropas</div>
+</div>
+
+<div class="view active" id="view-leden">
+  <div class="period-bar">
+    <select id="period-mode">
+      <option value="maand">Maand</option>
+      <option value="tm">T/m maand</option>
+      <option value="totaal">Totaal</option>
+    </select>
+    <select id="period-month"></select>
+  </div>
+  <div class="summary">
+    <div class="stat"><div class="label">Betaald</div><div class="val" id="stat-paid-count">0 / 0</div></div>
+    <div class="stat"><div class="label">Opgehaald</div><div class="val" id="stat-paid-total">€0,00</div></div>
+    <div class="stat"><div class="label">Nog te betalen</div><div class="val" id="stat-open-total">€0,00</div></div>
+  </div>
+  <form class="add" id="form-lid" action="javascript:void(0);">
+    <input type="text" id="lid-naam" placeholder="Naam" required>
+    <button class="primary" type="submit">Lid toevoegen</button>
+  </form>
+  <div id="leden-list"></div>
+</div>
+
+<div class="modal" id="member-modal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="name" id="modal-name">–</div>
+      <button class="link" id="modal-close">Sluiten</button>
+    </div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div id="modal-months"></div>
+  </div>
+</div>
+
+<div class="modal" id="admin-modal" style="display:none">
+  <div class="modal-box pw-box">
+    <h2 style="margin:0 0 6px;font-size:1.1rem">Beheerderswachtwoord</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin:0 0 14px">Vul het wachtwoord in om te kunnen bewerken.</p>
+    <form id="admin-form" action="javascript:void(0);">
+      <input type="password" id="admin-input" placeholder="Wachtwoord" autofocus>
+      <button class="primary" type="submit">Inloggen</button>
+      <button class="link" type="button" id="admin-cancel">Annuleren</button>
+      <div class="gate-err" id="admin-err"></div>
+    </form>
+  </div>
+</div>
+
+<div class="view" id="view-anys">
+  <div id="anys-list"></div>
+</div>
+
+<div class="view" id="view-intropas">
+  <div class="summary">
+    <div class="stat"><div class="label">Inkomsten</div><div class="val" id="stat-in">€0,00</div></div>
+    <div class="stat"><div class="label">Uitgaven</div><div class="val" id="stat-out">€0,00</div></div>
+    <div class="stat"><div class="label">Resterend budget</div><div class="val" id="stat-rest">€0,00</div></div>
+  </div>
+  <form class="add" id="form-tx" action="javascript:void(0);">
+    <input type="text" id="tx-desc" placeholder="Omschrijving" required>
+    <select id="tx-type"><option value="inkomst">Inkomst</option><option value="uitgave">Uitgave</option></select>
+    <input type="number" id="tx-amount" placeholder="Bedrag €" step="0.01" min="0" required>
+    <input type="date" id="tx-date" required>
+    <button class="primary" type="submit">Boeken</button>
+  </form>
+  <div id="tx-list"></div>
+</div>
+</div>
+
+<script>
+const FIXED_BLOB_ID = '1351119560424570880'; 
+const fmt = n => '€' + (Number(n)||0).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2});
+const CONTRIBUTIE = 35.26;
+const SITE_PASSWORD = 'INTROFINANCIEN';
+const EDIT_PASSWORD = 'PennieFeut';
+const MONTH_NAMES = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+let db=null;
+let memberDocs = [];
+
+function ls_get(k){ try{ return localStorage.getItem('intropas_pref_' + k); }catch(_){ return null; } }
+function ls_set(k,v){ try{ localStorage.setItem('intropas_pref_' + k, v); }catch(_){} }
+
+function updateAdminBtn(){
+  const btn = document.getElementById('admin-toggle');
+  const unlocked = ls_get('edit-unlocked')==='1';
+  btn.textContent = unlocked ? '🔓 Beheerder' : '🔒 Beheerder';
+}
+
+let pendingEditAction = null;
+
+function askAdminPassword(callback){
+  pendingEditAction = callback;
+  document.getElementById('admin-err').textContent = '';
+  document.getElementById('admin-input').value = '';
+  document.getElementById('admin-modal').style.display = 'flex';
+  document.getElementById('admin-input').focus();
+}
+function closeAdminModal(){
+  document.getElementById('admin-modal').style.display = 'none';
+  pendingEditAction = null;
+}
+document.getElementById('admin-form').addEventListener('submit', e=>{
+  e.preventDefault();
+  const val = (document.getElementById('admin-input').value || '').trim();
+  if(val===EDIT_PASSWORD){
+    ls_set('edit-unlocked','1');
+    updateAdminBtn();
+    document.getElementById('admin-modal').style.display = 'none';
+    const cb = pendingEditAction; pendingEditAction = null;
+    if(cb) cb();
+  } else {
+    document.getElementById('admin-err').textContent = 'Onjuist wachtwoord.';
+  }
+});
+document.getElementById('admin-cancel').addEventListener('click', closeAdminModal);
+document.getElementById('admin-modal').addEventListener('click', e=>{
+  if(e.target.id==='admin-modal') closeAdminModal();
+});
+
+function requireEdit(action){
+  if(ls_get('edit-unlocked')==='1'){ action(); return; }
+  askAdminPassword(action);
+}
+
+document.getElementById('admin-toggle').addEventListener('click', ()=>{
+  const unlocked = ls_get('edit-unlocked')==='1';
+  if(unlocked){
+    ls_set('edit-unlocked','0');
+    updateAdminBtn();
+    return;
+  }
+  askAdminPassword(null);
+});
+
+const BLOB_URL='https://jsonblob.com/api/jsonBlob/'+FIXED_BLOB_ID;
+const MONTHS=[];for(let i=0;i<12;i++){const m=(8+i)%12,y=2026+Math.floor((8+i)/12);MONTHS.push({k:y+'-'+String(m+1).padStart(2,'0'),l:MONTH_NAMES[m]+' '+y});}
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const unlocked=()=>ls_get('edit-unlocked')==='1';
+let ui={mode:'maand',sel:0},saveTimer=null,inited=false;
+
+function setStatus(t){$('sync-status').textContent=t;}
+function localSave(){try{localStorage.setItem('intropas_data',JSON.stringify(db));}catch(_){}}
+function localLoad(){try{return JSON.parse(localStorage.getItem('intropas_data'));}catch(_){return null;}}
+async function pushRemote(){
+  try{
+    const r=await fetch(BLOB_URL,{method:'PUT',headers:{'Content-Type':'application/json','Accept':'application/json'},body:JSON.stringify(db)});
+    if(!r.ok)throw new Error(r.status);
+    setStatus('☁️ Opgeslagen');
+  }catch(e){setStatus('⚠️ Alleen lokaal opgeslagen (tik om opnieuw te proberen)');}
+}
+function save(){localSave();setStatus('☁️ Opslaan...');clearTimeout(saveTimer);saveTimer=setTimeout(pushRemote,400);}
+async function loadData(){
+  const local=localLoad();
+  try{
+    const r=await fetch(BLOB_URL,{headers:{'Accept':'application/json'}});
+    if(!r.ok)throw new Error(r.status);
+    const d=await r.json();
+    if(d&&Array.isArray(d.leden)){db=d;setStatus('☁️ Gesynchroniseerd');}
+    else{db=local||{leden:[],tx:[]};setStatus('☁️ Nieuw');pushRemote();}
+  }catch(e){db=local||{leden:[],tx:[]};setStatus('⚠️ Offline: lokale gegevens (tik om opnieuw te proberen)');}
+  db.leden=db.leden||[];db.tx=db.tx||[];
+}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+
+function periodMonths(){
+  if(ui.mode==='maand')return [MONTHS[ui.sel].k];
+  if(ui.mode==='tm')return MONTHS.slice(0,ui.sel+1).map(m=>m.k);
+  return MONTHS.map(m=>m.k);
+}
+function renderLeden(){
+  const pm=periodMonths();let paidCnt=0,paidTot=0,openTot=0;
+  const html=db.leden.map(l=>{
+    const p=pm.filter(k=>l.betaald&&l.betaald[k]).length,full=p===pm.length;
+    if(full)paidCnt++;paidTot+=p*CONTRIBUTIE;openTot+=(pm.length-p)*CONTRIBUTIE;
+    return `<div class="card"><div class="row"><div class="lid" data-open="${l.id}"><div><div class="name">${esc(l.naam)}</div><div class="sub">${p}/${pm.length} maand(en) betaald</div></div></div><div class="row"><span class="${full?'paid':'owed'}">${full?'Betaald':'Open: '+fmt((pm.length-p)*CONTRIBUTIE)}</span><button class="del-x" data-del="${l.id}" title="Verwijderen">✕</button></div></div></div>`;
+  }).join('');
+  $('leden-list').innerHTML=html||'<div class="empty">Nog geen leden</div>';
+  $('stat-paid-count').textContent=paidCnt+' / '+db.leden.length;
+  $('stat-paid-total').textContent=fmt(paidTot);$('stat-open-total').textContent=fmt(openTot);
+}
+function renderModal(id){
+  const l=db.leden.find(x=>x.id===id);if(!l)return;
+  $('member-modal').dataset.id=id;$('modal-name').textContent=l.naam;
+  const n=MONTHS.filter(m=>l.betaald&&l.betaald[m.k]).length;
+  $('modal-sub').textContent=`Betaald ${fmt(n*CONTRIBUTIE)} van ${fmt(MONTHS.length*CONTRIBUTIE)}`;
+  $('modal-months').innerHTML=MONTHS.map(m=>`<div class="month-row"><span>${m.l}</span><label class="lid"><input type="checkbox" data-m="${m.k}" ${l.betaald&&l.betaald[m.k]?'checked':''}> <span class="${l.betaald&&l.betaald[m.k]?'paid':'owed'}">${fmt(CONTRIBUTIE)}</span></label></div>`).join('');
+  $('member-modal').style.display='flex';
+}
+function renderAnys(){
+  const ed=unlocked();
+  $('anys-list').innerHTML=db.leden.map(l=>{
+    const a=l.anys||0;
+    return `<div class="card"><div class="anys-row"><div class="lid-name" style="text-align:left">${esc(l.naam)}</div><div class="lid-ctrl">${ed?`<div class="stepper"><button data-an="${l.id}" data-d="-1">−</button><span class="pill">${a}</span><button data-an="${l.id}" data-d="1">+</button></div>`:`<div class="readonly-amt"><span class="pill">${a}</span></div>`}</div></div>${a?`<div class="beer-stack">${'🍺'.repeat(Math.min(a,60))}</div>`:''}</div>`;
+  }).join('')||'<div class="empty">Nog geen leden</div>';
+}
+function renderTx(){
+  let i=0,o=0;
+  const rows=[...db.tx].sort((a,b)=>b.date.localeCompare(a.date)).map(t=>{
+    t.type==='inkomst'?i+=t.amount:o+=t.amount;
+    return `<div class="card"><div class="row"><div><div class="name">${esc(t.desc)}</div><div class="sub">${esc(t.date)}</div></div><div class="row"><span class="badge ${t.type}">${t.type==='inkomst'?'+':'−'}${fmt(t.amount)}</span><button class="del-x" data-deltx="${t.id}">✕</button></div></div></div>`;
+  }).join('');
+  $('tx-list').innerHTML=rows||'<div class="empty">Nog geen boekingen</div>';
+  $('stat-in').textContent=fmt(i);$('stat-out').textContent=fmt(o);$('stat-rest').textContent=fmt(i-o);
+}
+function renderAll(){renderLeden();renderAnys();renderTx();}
+
+function init(){
+  if(inited)return;inited=true;
+  const now=new Date(),ck=now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const idx=MONTHS.findIndex(m=>m.k===ck);ui.sel=idx<0?0:idx;
+  $('period-month').innerHTML=MONTHS.map((m,i)=>`<option value="${i}">${m.l}</option>`).join('');$('period-month').value=ui.sel;
+  $('tx-date').value=now.toISOString().slice(0,10);
+  updateAdminBtn();
+  document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+    document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id==='view-'+t.dataset.tab));
+  }));
+  $('period-mode').addEventListener('change',e=>{ui.mode=e.target.value;$('period-month').style.display=ui.mode==='totaal'?'none':'';renderLeden();});
+  $('period-month').addEventListener('change',e=>{ui.sel=+e.target.value;renderLeden();});
+  $('form-lid').addEventListener('submit',e=>{e.preventDefault();const n=$('lid-naam').value.trim();if(!n)return;
+    requireEdit(()=>{db.leden.push({id:uid(),naam:n,betaald:{},anys:0});$('lid-naam').value='';save();renderAll();});});
+  $('leden-list').addEventListener('click',e=>{
+    const d=e.target.closest('[data-del]');
+    if(d){requireEdit(()=>{if(confirm('Lid verwijderen?')){db.leden=db.leden.filter(l=>l.id!==d.dataset.del);save();renderAll();}});return;}
+    const o=e.target.closest('[data-open]');if(o)renderModal(o.dataset.open);
+  });
+  $('modal-close').addEventListener('click',()=>$('member-modal').style.display='none');
+  $('member-modal').addEventListener('click',e=>{if(e.target.id==='member-modal')$('member-modal').style.display='none';});
+  $('modal-months').addEventListener('change',e=>{
+    const cb=e.target,id=$('member-modal').dataset.id,k=cb.dataset.m;
+    if(!unlocked()){cb.checked=!cb.checked;requireEdit(()=>{});return;}
+    const l=db.leden.find(x=>x.id===id);l.betaald=l.betaald||{};
+    if(cb.checked)l.betaald[k]=true;else delete l.betaald[k];
+    save();renderModal(id);renderLeden();
+  });
+  $('anys-list').addEventListener('click',e=>{
+    const b=e.target.closest('[data-an]');if(!b)return;
+    requireEdit(()=>{const l=db.leden.find(x=>x.id===b.dataset.an);l.anys=Math.max(0,(l.anys||0)+(+b.dataset.d));save();renderAnys();});
+  });
+  $('form-tx').addEventListener('submit',e=>{e.preventDefault();
+    requireEdit(()=>{db.tx.push({id:uid(),desc:$('tx-desc').value.trim(),type:$('tx-type').value,amount:parseFloat($('tx-amount').value)||0,date:$('tx-date').value});
+      $('tx-desc').value='';$('tx-amount').value='';save();renderTx();});});
+  $('tx-list').addEventListener('click',e=>{
+    const d=e.target.closest('[data-deltx]');if(!d)return;
+    requireEdit(()=>{if(confirm('Boeking verwijderen?')){db.tx=db.tx.filter(t=>t.id!==d.dataset.deltx);save();renderTx();}});
+  });
+  $('sync-status').addEventListener('click',async()=>{setStatus('☁️ Laden...');await loadData();renderAll();});
+  ['admin-form','admin-toggle'].forEach(id=>$(id).addEventListener(id==='admin-form'?'submit':'click',()=>setTimeout(renderAnys,0)));
+  setStatus('☁️ Laden...');
+  loadData().then(renderAll);
+}
+function openApp(){$('site-gate').style.display='none';$('app').style.display='block';init();}
+function setupGate(){
+  $('gate-form').addEventListener('submit',e=>{
+    e.preventDefault();
+    if($('gate-input').value.trim().toUpperCase()===SITE_PASSWORD){ls_set('site-unlocked','1');openApp();}
+    else $('gate-err').textContent='Onjuist wachtwoord.';
+  });
+  if(ls_get('site-unlocked')==='1')openApp();
+}
+setupGate();
+</script>
+</body>
+</html>
