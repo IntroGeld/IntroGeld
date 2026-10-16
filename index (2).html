@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Contributie & Intropas</title>
+<style>
+:root{
+  --bg:#f7f2f2; --card:#ffffff; --text:#241416; --muted:#7a6265;
+  --border:#e8d9da; --accent:#a3122b; --accent2:#0d7a72; --danger:#a3122b;
+  --pill:#f1e4e5;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#180f10; --card:#241618; --text:#f5e9ea; --muted:#b89ba0;
+    --border:#3d2529; --accent:#e0405e; --accent2:#2bc4b6; --danger:#e0405e;
+    --pill:#2e1c1f;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#180f10; --card:#241618; --text:#f5e9ea; --muted:#b89ba0;
+  --border:#3d2529; --accent:#e0405e; --accent2:#2bc4b6; --danger:#e0405e;
+  --pill:#2e1c1f;
+}
+*{box-sizing:border-box}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;padding:16px;padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+h1{font-size:1.3rem;margin:4px 0 14px}
+.tabs{display:flex;gap:8px;margin-bottom:16px;border-bottom:1px solid var(--border)}
+.tab{padding:10px 12px;cursor:pointer;color:var(--muted);border-bottom:2px solid transparent;font-weight:600;font-size:.92rem}
+.tab.active{color:var(--accent);border-color:var(--accent)}
+.view{display:none}
+.view.active{display:block}
+.card{background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px 14px;margin-bottom:10px;position:relative}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.name{font-weight:700}
+.sub{color:var(--muted);font-size:.85rem;margin-top:2px}
+.owed{color:var(--danger)}
+.paid{color:var(--accent2)}
+.lid{display:flex;align-items:center;gap:8px;cursor:pointer}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:90}
+.modal-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;max-width:380px;width:100%;max-height:80vh;overflow-y:auto}
+.modal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px}
+.modal-sub{color:var(--muted);font-size:.85rem;margin-bottom:14px}
+.month-row{display:flex;justify-content:space-between;align-items:center;padding:7px 0;border-bottom:1px solid var(--border);font-size:.9rem}
+.month-row:last-child{border-bottom:none}
+.pw-box input{width:100%;margin-bottom:10px;text-align:center}
+.pw-box button.primary{width:100%;margin-bottom:8px}
+.del-x{background:none;border:none;color:var(--muted);font-size:1rem;cursor:pointer;width:22px;flex-shrink:0}
+.lid-name{flex:1;text-align:center;font-weight:700}
+.lid-ctrl{flex-shrink:0;min-width:96px;display:flex;justify-content:flex-end}
+.stepper{display:flex;align-items:center;gap:6px}
+.stepper button{width:28px;height:28px;border-radius:8px;border:1px solid var(--border);background:var(--pill);color:var(--text);font-size:1rem;cursor:pointer}
+.pill{background:var(--pill);border-radius:8px;padding:3px 10px;font-weight:700;min-width:26px;text-align:center;font-size:.85rem}
+.readonly-amt{text-align:right}
+.readonly-amt .pill{display:block;margin-left:auto}
+.readonly-amt .sub{text-align:right}
+.anys-row{display:flex;align-items:center;justify-content:space-between;gap:10px}
+.beer-stack{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.beer-stack svg{width:34px;height:34px;flex-shrink:0}
+form.add{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+input,select{background:var(--card);border:1px solid var(--border);color:var(--text);border-radius:8px;padding:9px 10px;font-size:.9rem}
+input[type=text]{flex:1;min-width:120px}
+input[type=number]{width:100px}
+button.primary{background:var(--accent);color:#fff;border:none;border-radius:8px;padding:9px 16px;font-weight:700;cursor:pointer}
+button.link{background:none;border:none;color:var(--muted);cursor:pointer;font-size:.85rem;text-decoration:underline}
+.summary{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.stat{flex:1;min-width:110px;background:var(--card);border:1px solid var(--border);border-radius:12px;padding:12px}
+.stat .label{color:var(--muted);font-size:.76rem}
+.stat .val{font-size:1.15rem;font-weight:800;margin-top:2px}
+.period-bar{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}
+.empty{color:var(--muted);text-align:center;padding:30px 0}
+.badge{font-size:.75rem;padding:2px 8px;border-radius:999px;font-weight:700}
+.badge.inkomst{background:#0d7a7222;color:var(--accent2)}
+.badge.uitgave{background:#a3122b22;color:var(--danger)}
+.gate{position:fixed;inset:0;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:20px;z-index:100}
+.gate-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;max-width:320px;width:100%;text-align:center}
+.gate-box h2{margin:0 0 6px;font-size:1.1rem}
+.gate-box p{color:var(--muted);font-size:.85rem;margin:0 0 14px}
+.gate-box input{width:100%;margin-bottom:10px;text-align:center}
+.gate-box button{width:100%}
+.gate-err{color:var(--danger);font-size:.8rem;min-height:1.2em;margin-top:6px}
+</style>
+</head>
+<body>
+<div class="gate" id="site-gate">
+  <div class="gate-box">
+    <h2>Toegang vereist</h2>
+    <p>Vul het wachtwoord in om de site te openen.</p>
+    <form id="gate-form">
+      <input type="password" id="gate-input" placeholder="Wachtwoord" autofocus>
+      <button class="primary" type="submit">Ontgrendelen</button>
+      <div class="gate-err" id="gate-err"></div>
+    </form>
+  </div>
+</div>
+<div id="app" style="display:none">
+<div class="row" style="margin-bottom:14px">
+  <h1 style="margin:0">Contributie & Intropas</h1>
+  <div><button class="link" id="share-btn">⚙️ Opslag</button> <button class="link" id="admin-toggle">🔒 Beheerder inloggen</button></div>
+</div>
+<div id="share-info" class="sub" style="display:none;margin-bottom:10px;word-break:break-all"></div>
+<div class="tabs">
+  <div class="tab active" data-tab="leden">Leden</div>
+  <div class="tab" data-tab="anys">Anys</div>
+  <div class="tab" data-tab="intropas">Intropas</div>
+</div>
+
+<div class="view active" id="view-leden">
+  <div class="period-bar">
+    <select id="period-mode">
+      <option value="maand">Maand</option>
+      <option value="tm">T/m maand</option>
+      <option value="totaal">Totaal</option>
+    </select>
+    <select id="period-month"></select>
+  </div>
+  <div class="summary">
+    <div class="stat"><div class="label">Betaald</div><div class="val" id="stat-paid-count">0 / 0</div></div>
+    <div class="stat"><div class="label">Opgehaald</div><div class="val" id="stat-paid-total">€0,00</div></div>
+    <div class="stat"><div class="label">Nog te betalen</div><div class="val" id="stat-open-total">€0,00</div></div>
+  </div>
+  <form class="add" id="form-lid">
+    <input type="text" id="lid-naam" placeholder="Naam" required>
+    <button class="primary" type="submit">Lid toevoegen</button>
+  </form>
+  <div id="leden-list"></div>
+</div>
+
+<div class="modal" id="member-modal" style="display:none">
+  <div class="modal-box">
+    <div class="modal-head">
+      <div class="name" id="modal-name">–</div>
+      <button class="link" id="modal-close">Sluiten</button>
+    </div>
+    <div class="modal-sub" id="modal-sub"></div>
+    <div id="modal-months"></div>
+  </div>
+</div>
+
+<div class="modal" id="cfg-modal" style="display:none">
+  <div class="modal-box pw-box">
+    <h2 style="margin:0 0 6px;font-size:1.1rem">Opslag instellen</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin:0 0 14px">Gegevens worden bewaard in het bestand data.json in je GitHub-repo, zodat elk apparaat dezelfde gegevens ziet.</p>
+    <form id="cfg-form">
+      <input type="text" id="cfg-owner" placeholder="GitHub-gebruikersnaam">
+      <input type="text" id="cfg-repo" placeholder="Repository-naam">
+      <input type="password" id="cfg-token" placeholder="Toegangstoken">
+      <button class="primary" type="submit">Opslaan</button>
+      <button class="link" type="button" id="cfg-cancel">Annuleren</button>
+    </form>
+  </div>
+</div>
+
+<div class="modal" id="admin-modal" style="display:none">
+  <div class="modal-box pw-box">
+    <h2 style="margin:0 0 6px;font-size:1.1rem">Beheerderswachtwoord</h2>
+    <p style="color:var(--muted);font-size:.85rem;margin:0 0 14px">Vul het wachtwoord in om te kunnen bewerken.</p>
+    <form id="admin-form">
+      <input type="password" id="admin-input" placeholder="Wachtwoord" autofocus>
+      <button class="primary" type="submit">Inloggen</button>
+      <button class="link" type="button" id="admin-cancel">Annuleren</button>
+      <div class="gate-err" id="admin-err"></div>
+    </form>
+  </div>
+</div>
+
+<div class="view" id="view-anys">
+  <div id="anys-list"></div>
+</div>
+
+<div class="view" id="view-intropas">
+  <div class="summary">
+    <div class="stat"><div class="label">Inkomsten</div><div class="val" id="stat-in">€0,00</div></div>
+    <div class="stat"><div class="label">Uitgaven</div><div class="val" id="stat-out">€0,00</div></div>
+    <div class="stat"><div class="label">Resterend budget</div><div class="val" id="stat-rest">€0,00</div></div>
+  </div>
+  <form class="add" id="form-tx">
+    <input type="text" id="tx-desc" placeholder="Omschrijving" required>
+    <select id="tx-type"><option value="inkomst">Inkomst</option><option value="uitgave">Uitgave</option></select>
+    <input type="number" id="tx-amount" placeholder="Bedrag €" step="0.01" min="0" required>
+    <input type="date" id="tx-date" required>
+    <button class="primary" type="submit">Boeken</button>
+  </form>
+  <div id="tx-list"></div>
+</div>
+</div>
+
+<script>
+const fmt = n => '€' + (Number(n)||0).toLocaleString('nl-NL',{minimumFractionDigits:2,maximumFractionDigits:2});
+const CONTRIBUTIE = 35.26;
+const SITE_PASSWORD = 'INTROFINANCIEN';
+const EDIT_PASSWORD = 'PennieFeut';
+const MONTH_NAMES = ['januari','februari','maart','april','mei','juni','juli','augustus','september','oktober','november','december'];
+let db=null;
+let memberDocs = [];
+
+function ss_get(k){ try{ return sessionStorage.getItem(k); }catch(_){ return null; } }
+function ss_set(k,v){ try{ sessionStorage.setItem(k,v); }catch(_){} }
+
+function updateAdminBtn(){
+  const btn = document.getElementById('admin-toggle');
+  const unlocked = ss_get('edit-unlocked')==='1';
+  btn.textContent = unlocked ? '🔓 Beheerder actief' : '🔒 Beheerder inloggen';
+}
+
+let pendingEditAction = null;
+
+function askAdminPassword(callback){
+  pendingEditAction = callback;
+  document.getElementById('admin-err').textContent = '';
+  document.getElementById('admin-input').value = '';
+  document.getElementById('admin-modal').style.display = 'flex';
+  document.getElementById('admin-input').focus();
+}
+function closeAdminModal(){
+  document.getElementById('admin-modal').style.display = 'none';
+  pendingEditAction = null;
+}
+document.getElementById('admin-form').addEventListener('submit', e=>{
+  e.preventDefault();
+  const val = document.getElementById('admin-input').value;
+  if(val.trim().toLowerCase()===EDIT_PASSWORD.toLowerCase()){
+    ss_set('edit-unlocked','1');
+    updateAdminBtn();
+    document.getElementById('admin-modal').style.display = 'none';
+    const cb = pendingEditAction; pendingEditAction = null;
+    if(cb) cb();
+  } else {
+    document.getElementById('admin-err').textContent = 'Onjuist wachtwoord.';
+  }
+});
+document.getElementById('admin-cancel').addEventListener('click', closeAdminModal);
+document.getElementById('admin-modal').addEventListener('click', e=>{
+  if(e.target.id==='admin-modal') closeAdminModal();
+});
+
+function requireEdit(action){
+  if(ss_get('edit-unlocked')==='1'){ action(); return; }
+  askAdminPassword(action);
+}
+
+document.getElementById('admin-toggle').addEventListener('click', ()=>{
+  const unlocked = ss_get('edit-unlocked')==='1';
+  if(unlocked){
+    ss_set('edit-unlocked','0');
+    updateAdminBtn();
+    return;
+  }
+  askAdminPassword(null);
+});
+
+function setupGate(){
+  if(ss_get('site-unlocked')==='1'){
+    document.getElementById('site-gate').style.display='none';
+    document.getElementById('app').style.display='';
+    updateAdminBtn();
+    init();
+    return;
+  }
+  document.getElementById('gate-form').addEventListener('submit', e=>{
+    e.preventDefault();
+    const val = document.getElementById('gate-input').value;
+    if(val.trim().toLowerCase()===SITE_PASSWORD.toLowerCase()){
+      ss_set('site-unlocked','1');
+      document.getElementById('site-gate').style.display='none';
+      document.getElementById('app').style.display='';
+      updateAdminBtn();
+      init();
+    } else {
+      document.getElementById('gate-err').textContent = 'Onjuist wachtwoord.';
+    }
+  });
+}
+
+function getYearMonths(){
+  const startYear = 2026;
+  const months = [];
+  for(let i=0;i<12;i++){
+    const m = (10+i)%12;
+    const y = startYear + (10+i>=12?1:0);
+    const key = y+'-'+String(m+1).padStart(2,'0');
+    months.push({key, label: MONTH_NAMES[m]+' '+y});
+  }
+  return months;
+}
+const YEAR_MONTHS = getYearMonths();
+
+function currentMonthIndex(){
+  const now = new Date();
+  const key = now.getFullYear()+'-'+String(now.getMonth()+1).padStart(2,'0');
+  const idx = YEAR_MONTHS.findIndex(m=>m.key===key);
+  return idx>=0?idx:0;
+}
+
+function initPeriodBar(){
+  const sel = document.getElementById('period-month');
+  sel.innerHTML = YEAR_MONTHS.map((m,i)=>`<option value="${i}">${m.label.charAt(0).toUpperCase()+m.label.slice(1)}</option>`).join('');
+  sel.value = currentMonthIndex();
+  document.getElementById('period-mode').addEventListener('change', onPeriodChange);
+  sel.addEventListener('change', onPeriodChange);
+  onPeriodChange();
+}
+function onPeriodChange(){
+  const mode = document.getElementById('period-mode').value;
+  document.getElementById('period-month').style.display = mode==='totaal' ? 'none' : '';
+  renderLeden(memberDocs);
+  renderMemberDetail();
+}
+
+document.querySelectorAll('.tab').forEach(t=>t.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('active'));
+  document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+  t.classList.add('active');
+  document.getElementById('view-'+t.dataset.tab).classList.add('active');
+});
+
+function escapeHtml(s){ return String(s).replace(/[&<>"']/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+function paidInRange(payments, fromIdx, toIdx){
+  let sum=0;
+  for(let i=fromIdx;i<=toIdx;i++){ sum += Number((payments||{})[YEAR_MONTHS[i].key])||0; }
+  return sum;
+}
+
+function renderLeden(docs){
+  memberDocs = docs;
+  const mode = document.getElementById('period-mode').value;
+  const monthIdx = parseInt(document.getElementById('period-month').value||currentMonthIndex(),10);
+  const el = document.getElementById('leden-list');
+
+  let totalPaidCount=0, totalExpected=0;
+
+  const rows = docs.map(d=>{
+    const m = d.data;
+    const payments = m.payments||{};
+    let paidCount, expected, ctrlHtml;
+    if(mode==='maand'){
+      paidCount = Number(payments[YEAR_MONTHS[monthIdx].key])||0;
+      expected = 1;
+      ctrlHtml = `<div class="stepper">
+        <button data-act="pay-min">–</button>
+        <span class="pill">${paidCount}</span>
+        <button data-act="pay-plus">+</button>
+      </div>`;
+    } else if(mode==='tm'){
+      paidCount = paidInRange(payments,0,monthIdx);
+      expected = monthIdx+1;
+      ctrlHtml = `<div class="readonly-amt"><div class="pill">${paidCount}x</div><div class="sub">${fmt(paidCount*CONTRIBUTIE)}</div></div>`;
+    } else {
+      paidCount = paidInRange(payments,0,11);
+      expected = 12;
+      ctrlHtml = `<div class="readonly-amt"><div class="pill">${paidCount}x</div><div class="sub">${fmt(paidCount*CONTRIBUTIE)}</div></div>`;
+    }
+    totalPaidCount += Math.min(paidCount,expected);
+    totalExpected += expected;
+    const open = Math.max(0, expected-paidCount);
+    return `<div class="card lid" data-id="${d.id}">
+      <button class="del-x" data-act="del" title="Verwijder">×</button>
+      <div class="lid-name">${escapeHtml(m.name||'')}${open>0?`<div class="sub owed">${open} keer nog te betalen</div>`:'<div class="sub paid">Voldaan</div>'}</div>
+      <div class="lid-ctrl">${ctrlHtml}</div>
+    </div>`;
+  });
+
+  document.getElementById('stat-paid-count').textContent = totalPaidCount+' / '+totalExpected;
+  document.getElementById('stat-paid-total').textContent = fmt(totalPaidCount*CONTRIBUTIE);
+  document.getElementById('stat-open-total').textContent = fmt(Math.max(0,totalExpected-totalPaidCount)*CONTRIBUTIE);
+
+  el.innerHTML = docs.length ? rows.join('') : '<div class="empty">Nog geen leden toegevoegd.</div>';
+}
+
+const BEER_SVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 8h11v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V8Z" fill="#e0a527"/><path d="M5 8h11v3H5V8Z" fill="#f2c94c"/><path d="M16 10h1.5a2 2 0 0 1 2 2v2a2 2 0 0 1-2 2H16" stroke="#8a6d1a" stroke-width="1.4"/><path d="M5 8c0-1.7 1-3 3-3s3 1 2.5 2.5C11 6 12.5 5 14 6s1.5 2 1 2" fill="#fff" opacity=".85"/></svg>';
+const WINE_SVG = '<svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 3c0 4.5 1.2 7.5 5 7.5s5-3 5-7.5H7Z" fill="#8b1538"/><path d="M7 3c0 4.5 1.2 7.5 5 7.5s5-3 5-7.5" stroke="#5c0e26" stroke-width="1"/><path d="M12 10.5V18" stroke="#5c0e26" stroke-width="1.4"/><path d="M8.5 20.5h7" stroke="#5c0e26" stroke-width="1.4" stroke-linecap="round"/><path d="M12 18v2.5" stroke="#5c0e26" stroke-width="1.4"/></svg>';
+function iconFor(name){
+  return (name||'').trim().toLowerCase()==='britt' ? WINE_SVG : BEER_SVG;
+}
+
+function renderAnys(docs){
+  const el = document.getElementById('anys-list');
+  if(!docs.length){ el.innerHTML = '<div class="empty">Nog geen leden toegevoegd.</div>'; return; }
+  el.innerHTML = docs.map(d=>{
+    const count = Number(d.data.anys)||0;
+    const icon = iconFor(d.data.name);
+    const stack = count>0 ? Array(count).fill(icon).join('') : '';
+    return `<div class="card" data-id="${d.id}">
+      <div class="anys-row">
+        <div class="name">${escapeHtml(d.data.name||'')}</div>
+        <div class="stepper">
+          <button data-act="anys-min">–</button>
+          <span class="pill">${count}</span>
+          <button data-act="anys-plus">+</button>
+        </div>
+      </div>
+      ${count>0 ? `<div class="beer-stack">${stack}</div>` : ''}
+    </div>`;
+  }).join('');
+}
+
+document.getElementById('anys-list').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn || !db) return;
+  const card = e.target.closest('.card'); const id = card.dataset.id;
+  requireEdit(()=>{
+    const m = memberDocs.find(x=>x.id===id);
+    const cur = m ? (Number(m.data.anys)||0) : 0;
+    const next = btn.dataset.act==='anys-plus' ? cur+1 : Math.max(0,cur-1);
+    db.doc('members/'+id).update({anys: next}).catch(()=>{});
+  });
+});
+
+function renderTx(docs){
+  const el = document.getElementById('tx-list');
+  let inSum=0, outSum=0;
+  docs.forEach(d=>{ if(d.data.type==='inkomst') inSum+=Number(d.data.amount)||0; else outSum+=Number(d.data.amount)||0; });
+  document.getElementById('stat-in').textContent = fmt(inSum);
+  document.getElementById('stat-out').textContent = fmt(outSum);
+  document.getElementById('stat-rest').textContent = fmt(inSum-outSum);
+  if(!docs.length){ el.innerHTML='<div class="empty">Nog geen in- of uitgaven geboekt.</div>'; return; }
+  const sorted = docs.slice().sort((a,b)=>(b.data.iso||'').localeCompare(a.data.iso||'') || (b.data.ts||0)-(a.data.ts||0));
+  el.innerHTML = sorted.map(d=>{
+    const t=d.data;
+    return `<div class="card" data-id="${d.id}">
+      <div class="row">
+        <div>
+          <div class="name">${escapeHtml(t.desc||'')}</div>
+          <div class="sub">${t.date||''}</div>
+        </div>
+        <div class="row" style="gap:10px">
+          <span class="badge ${t.type}">${t.type==='inkomst'?'+':'-'} ${fmt(t.amount)}</span>
+          <button class="link" data-act="del">×</button>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+let detailMemberId = null;
+
+function renderMemberDetail(){
+  if(!detailMemberId) return;
+  const m = memberDocs.find(x=>x.id===detailMemberId);
+  if(!m){ document.getElementById('member-modal').style.display='none'; detailMemberId=null; return; }
+  const monthIdx = parseInt(document.getElementById('period-month').value,10) || 0;
+  const payments = m.data.payments||{};
+  const paidTotal = paidInRange(payments,0,monthIdx);
+  const expected = monthIdx+1;
+  const open = Math.max(0, expected-paidTotal);
+  document.getElementById('modal-name').textContent = m.data.name||'';
+  document.getElementById('modal-sub').textContent = 'Tot en met '+YEAR_MONTHS[monthIdx].label+': '+
+    (open>0 ? open+' keer (' + fmt(open*CONTRIBUTIE) + ') nog te betalen' : 'volledig voldaan');
+  document.getElementById('modal-months').innerHTML = YEAR_MONTHS.slice(0,monthIdx+1).map(mo=>{
+    const c = Number(payments[mo.key])||0;
+    const paid = c>=1;
+    return `<div class="month-row">
+      <span>${mo.label.charAt(0).toUpperCase()+mo.label.slice(1)}</span>
+      <span class="${paid?'paid':'owed'}">${paid ? 'Betaald'+(c>1?' ('+c+'x)':'') : 'Niet betaald'}</span>
+    </div>`;
+  }).join('');
+}
+
+function openMemberDetail(id){
+  detailMemberId = id;
+  document.getElementById('member-modal').style.display='flex';
+  renderMemberDetail();
+}
+document.getElementById('modal-close').addEventListener('click', ()=>{
+  document.getElementById('member-modal').style.display='none';
+  detailMemberId = null;
+});
+document.getElementById('member-modal').addEventListener('click', e=>{
+  if(e.target.id==='member-modal'){ document.getElementById('member-modal').style.display='none'; detailMemberId=null; }
+});
+
+document.getElementById('leden-list').addEventListener('click', e=>{
+  const card = e.target.closest('.card'); if(!card) return;
+  const id = card.dataset.id;
+  const btn = e.target.closest('button');
+  if(!btn){ openMemberDetail(id); return; }
+  if(!db) return;
+  requireEdit(()=>{
+    const ref = db.doc('members/'+id);
+    if(btn.dataset.act==='del'){ ref.delete().catch(()=>{}); return; }
+    if(btn.dataset.act==='pay-plus' || btn.dataset.act==='pay-min'){
+      const monthIdx = parseInt(document.getElementById('period-month').value,10);
+      const monthKey = YEAR_MONTHS[monthIdx].key;
+      const monthLabel = YEAR_MONTHS[monthIdx].label;
+      const m = memberDocs.find(x=>x.id===id);
+      const cur = Number((m && m.data.payments && m.data.payments[monthKey])||0);
+      if(btn.dataset.act==='pay-plus'){
+        const next = cur+1;
+        ref.update({payments:{[monthKey]: next}}).catch(()=>{});
+        db.collection('transactions').add({
+          desc:'Contributie - '+(m?m.data.name:'')+' ('+monthLabel+')',
+          type:'inkomst', amount:CONTRIBUTIE,
+          date:new Date().toLocaleDateString('nl-NL'),
+          iso:new Date().toISOString().slice(0,10),
+          memberId:id, monthKey, ts:Date.now(), auto:true
+        }).catch(()=>{});
+      } else {
+        if(cur<=0) return;
+        const next = cur-1;
+        ref.update({payments:{[monthKey]: next}}).catch(()=>{});
+        db.collection('transactions').where('memberId','==',id).where('monthKey','==',monthKey).orderBy('ts','desc').limit(1).get()
+          .then(snap=>{ if(snap.docs.length) snap.docs[0].ref.delete().catch(()=>{}); })
+          .catch(()=>{});
+      }
+    }
+  });
+});
+
+document.getElementById('tx-list').addEventListener('click', e=>{
+  const btn = e.target.closest('button'); if(!btn) return;
+  const card = e.target.closest('.card'); const id = card.dataset.id;
+  if(!db) return;
+  if(btn.dataset.act==='del') requireEdit(()=> db.doc('transactions/'+id).delete().catch(()=>{}));
+});
+
+document.getElementById('form-lid').addEventListener('submit', e=>{
+  e.preventDefault();
+  const name = document.getElementById('lid-naam').value.trim();
+  if(!name || !db) return;
+  requireEdit(()=>{
+    db.collection('members').add({name, anys:0, payments:{}}).catch(()=>{});
+    document.getElementById('form-lid').reset();
+  });
+});
+
+document.getElementById('form-tx').addEventListener('submit', e=>{
+  e.preventDefault();
+  const desc = document.getElementById('tx-desc').value.trim();
+  const type = document.getElementById('tx-type').value;
+  const amount = parseFloat(document.getElementById('tx-amount').value)||0;
+  const iso = document.getElementById('tx-date').value || new Date().toISOString().slice(0,10);
+  if(!desc || !db) return;
+  requireEdit(()=>{
+    const date = new Date(iso+'T00:00:00').toLocaleDateString('nl-NL');
+    db.collection('transactions').add({desc, type, amount, date, iso, ts:Date.now()}).catch(()=>{});
+    document.getElementById('form-tx').reset();
+    document.getElementById('tx-date').value = new Date().toISOString().slice(0,10);
+  });
+});
+
+
+let storeRef=null;
+
+function createStore(){
+  const LS='intropas-data', CFG='intropas-gh';
+  let state={members:{},transactions:{}};
+  const subs={members:[],transactions:[]};
+  const uid=()=>Math.random().toString(36).slice(2,10)+Date.now().toString(36);
+  const norm=o=>({members:(o&&o.members)||{},transactions:(o&&o.transactions)||{}});
+  const merge=(t,s)=>{for(const k in s){ if(s[k]&&typeof s[k]==='object'&&!Array.isArray(s[k])){ t[k]=merge(t[k]&&typeof t[k]==='object'?t[k]:{},s[k]); } else t[k]=s[k]; } return t;};
+  const docObj=(n,id)=>({id, data:()=>JSON.parse(JSON.stringify(state[n][id])), ref:{delete:()=>del(n,id)}});
+  const snapshot=n=>({docs:Object.keys(state[n]).map(id=>docObj(n,id))});
+  const emit=()=>{ ['members','transactions'].forEach(n=>subs[n].forEach(cb=>cb(snapshot(n)))); };
+  const setStatus=t=>{ const i=document.getElementById('share-info'); i.style.display=t?'block':'none'; i.textContent=t||''; };
+
+  let cfg={owner:'',repo:'',token:''};
+  try{ cfg=Object.assign(cfg,JSON.parse(localStorage.getItem(CFG)||'{}')); }catch(_){}
+  if(!cfg.owner||!cfg.repo){
+    const h=location.hostname;
+    if(h.endsWith('.github.io')){ cfg.owner=h.split('.')[0]; cfg.repo=location.pathname.split('/')[1]||''; }
+  }
+  const api=()=>'https://api.github.com/repos/'+cfg.owner+'/'+cfg.repo+'/contents/data.json';
+  let sha=null, dirty=false, writing=false;
+
+  async function remoteLoad(){
+    if(!cfg.owner||!cfg.repo) return false;
+    try{
+      const h={'Accept':'application/vnd.github+json'};
+      if(cfg.token) h['Authorization']='Bearer '+cfg.token;
+      const r=await fetch(api()+'?t='+Date.now(),{headers:h,cache:'no-store'});
+      if(r.status===404){ sha=null; return true; }
+      if(!r.ok) return false;
+      const j=await r.json(); sha=j.sha;
+      const txt=decodeURIComponent(escape(atob(j.content.replace(/\s/g,''))));
+      const next=norm(JSON.parse(txt));
+      if(JSON.stringify(next)!==JSON.stringify(state)){ state=next; try{localStorage.setItem(LS,JSON.stringify(state));}catch(_){} emit(); }
+      return true;
+    }catch(_){ return false; }
+  }
+
+  async function flush(){
+    if(writing) return;
+    if(!cfg.token||!cfg.owner||!cfg.repo){
+      dirty=false;
+      setStatus('Alleen op dit apparaat opgeslagen. Klik op ⚙️ Opslag en vul een GitHub-token in om te delen met andere apparaten.');
+      return;
+    }
+    writing=true;
+    while(dirty){
+      dirty=false;
+      try{
+        const body={message:'Update gegevens',content:btoa(unescape(encodeURIComponent(JSON.stringify(state,null,1))))};
+        if(sha) body.sha=sha;
+        const r=await fetch(api(),{method:'PUT',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+cfg.token,'Content-Type':'application/json'},body:JSON.stringify(body)});
+        if(r.ok){ sha=(await r.json()).content.sha; setStatus('Opgeslagen op GitHub ✓'); }
+        else if(r.status===409||r.status===422){ await remoteLoad(); setStatus('Iemand anders paste net iets aan; de gegevens zijn ververst. Doe je wijziging nog een keer.'); }
+        else if(r.status===401||r.status===403||r.status===404){ setStatus('Opslaan mislukt: token ongeldig, repo-naam onjuist of geen schrijfrechten (status '+r.status+').'); }
+        else { setStatus('Opslaan mislukt (status '+r.status+').'); }
+      }catch(_){ setStatus('Opslaan mislukt: geen verbinding.'); }
+    }
+    writing=false;
+  }
+
+  function persist(){
+    try{ localStorage.setItem(LS,JSON.stringify(state)); }catch(_){}
+    dirty=true; flush();
+  }
+  function del(n,id){ delete state[n][id]; persist(); emit(); return Promise.resolve(); }
+  function update(n,id,o){ if(state[n][id]){ merge(state[n][id],o); persist(); emit(); } return Promise.resolve(); }
+  function query(n){
+    const f=[]; let ord=null, lim=null;
+    const q={
+      where(a,op,v){ f.push([a,v]); return q; },
+      orderBy(a,d){ ord=[a,d]; return q; },
+      limit(x){ lim=x; return q; },
+      get(){
+        let ids=Object.keys(state[n]).filter(id=>f.every(([a,v])=>state[n][id][a]===v));
+        if(ord) ids.sort((x,y)=>((state[n][x][ord[0]]||0)-(state[n][y][ord[0]]||0))*(ord[1]==='desc'?-1:1));
+        if(lim) ids=ids.slice(0,lim);
+        return Promise.resolve({docs:ids.map(id=>docObj(n,id))});
+      }
+    };
+    return q;
+  }
+  const store={
+    collection(n){
+      return Object.assign(query(n),{
+        onSnapshot(cb){ subs[n].push(cb); cb(snapshot(n)); },
+        add(data){ const id=uid(); state[n][id]=data; persist(); emit(); return Promise.resolve({id}); }
+      });
+    },
+    doc(path){ const [n,id]=path.split('/'); return { update:o=>update(n,id,o), delete:()=>del(n,id) }; },
+    getCfg:()=>Object.assign({},cfg),
+    async setCfg(o){
+      cfg=Object.assign(cfg,o);
+      try{ localStorage.setItem(CFG,JSON.stringify(cfg)); }catch(_){}
+      const ok=await remoteLoad();
+      if(!ok) setStatus('Kan GitHub niet bereiken met deze gegevens. Controleer gebruikersnaam en repository-naam (de repo moet openbaar zijn).');
+      else if(cfg.token){ dirty=true; flush(); }
+    }
+  };
+  return (async()=>{
+    try{ state=norm(JSON.parse(localStorage.getItem(LS)||'null')); }catch(_){}
+    await remoteLoad();
+    let tick=0;
+    setInterval(()=>{ tick++; if(dirty||writing) return; if(cfg.token || tick%4===0) remoteLoad(); },20000);
+    return store;
+  })();
+}
+
+function openCfg(){
+  const c=storeRef?storeRef.getCfg():{owner:'',repo:'',token:''};
+  document.getElementById('cfg-owner').value=c.owner||'';
+  document.getElementById('cfg-repo').value=c.repo||'';
+  document.getElementById('cfg-token').value=c.token||'';
+  document.getElementById('cfg-modal').style.display='flex';
+}
+document.getElementById('share-btn').addEventListener('click',()=>requireEdit(openCfg));
+document.getElementById('cfg-cancel').addEventListener('click',()=>{ document.getElementById('cfg-modal').style.display='none'; });
+document.getElementById('cfg-form').addEventListener('submit',e=>{
+  e.preventDefault();
+  if(storeRef) storeRef.setCfg({
+    owner:document.getElementById('cfg-owner').value.trim(),
+    repo:document.getElementById('cfg-repo').value.trim(),
+    token:document.getElementById('cfg-token').value.trim()
+  });
+  document.getElementById('cfg-modal').style.display='none';
+});
+
+async function init(){
+  initPeriodBar();
+  document.getElementById('tx-date').value = new Date().toISOString().slice(0,10);
+  try{
+    db = await createStore(); storeRef = db;
+  }catch(_){ db = null; }
+  if(!db){
+    document.getElementById('leden-list').innerHTML = '<div class="empty">Opslag niet beschikbaar in deze weergave.</div>';
+    document.getElementById('anys-list').innerHTML = '<div class="empty">Opslag niet beschikbaar in deze weergave.</div>';
+    document.getElementById('tx-list').innerHTML = '<div class="empty">Opslag niet beschikbaar in deze weergave.</div>';
+    return;
+  }
+  db.collection('members').onSnapshot(snap=>{
+    const docs = snap.docs.map(d=>({id:d.id, data:d.data()}))
+      .sort((a,b)=>(a.data.name||'').localeCompare(b.data.name||'','nl',{sensitivity:'base'}));
+    renderLeden(docs);
+    renderAnys(docs);
+    renderMemberDetail();
+  }, ()=>{});
+  db.collection('transactions').onSnapshot(snap=>{
+    const docs = snap.docs.map(d=>({id:d.id, data:d.data()}));
+    renderTx(docs);
+  }, ()=>{});
+}
+window.addEventListener('DOMContentLoaded', setupGate);
+</script>
+</body>
+</html>
