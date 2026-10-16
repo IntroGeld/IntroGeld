@@ -1,0 +1,69 @@
+{
+ "members": {
+  "x406kqifmv9p66a7": {
+   "name": "Daan",
+   "anys": 0,
+   "payments": {}
+  },
+  "kgi8zamgmv9p691a": {
+   "name": "Hessel",
+   "anys": 0,
+   "payments": {}
+  },
+  "tdr1ph7jmv9p6b8z": {
+   "name": "Britt",
+   "anys": 0,
+   "payments": {}
+  },
+  "7cwc82v0mv9p6cj3": {
+   "name": "Olivier",
+   "anys": 0,
+   "payments": {}
+  },
+  "2pg4dmjjmv9p6j9k": {
+   "name": "Tukkers",
+   "anys": 0,
+   "payments": {}
+  },
+  "1zswj2wsmv9p6n8n": {
+   "name": "Mik",
+   "anys": 0,
+   "payments": {}
+  },
+  "bhd17rt7mv9p6qid": {
+   "name": "Flore",
+   "anys": 0,
+   "payments": {}
+  },
+  "0ti1m1ibmv9p6rh6": {
+   "name": "Kaja",
+   "anys": 0,
+   "payments": {}
+  },
+  "wivo2bj0mv9p6ykj": {
+   "name": "Mariecke",
+   "anys": 0,
+   "payments": {}
+  },
+  "byjjmiqdmv9p74ka": {
+   "name": "Linde",
+   "anys": 0,
+   "payments": {}
+  },
+  "5ay6n46pmv9p7hyh": {
+   "name": "Leonie",
+   "anys": 0,
+   "payments": {}
+  }
+ },
+ "transactions": {
+  "80zxfckkmvayb9e8": {
+   "desc": "Rabobank",
+   "type": "inkomst",
+   "amount": 75,
+   "date": "16-10-2026",
+   "iso": "2026-10-16",
+   "ts": 1792154156624
+  }
+ }
+}
