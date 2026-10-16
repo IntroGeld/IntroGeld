@@ -62,28 +62,5 @@
    "payments": {}
   }
  },
- "transactions": {
-  "9uz4v65zmvayta31": {
-   "desc": "Contributie - Britt (november 2026)",
-   "type": "inkomst",
-   "amount": 35.26,
-   "date": "16-10-2026",
-   "iso": "2026-10-16",
-   "memberId": "tdr1ph7jmv9p6b8z",
-   "monthKey": "2026-11",
-   "ts": 1792154997325,
-   "auto": true
-  },
-  "or2uhucqmvaytars": {
-   "desc": "Contributie - Daan (november 2026)",
-   "type": "inkomst",
-   "amount": 35.26,
-   "date": "16-10-2026",
-   "iso": "2026-10-16",
-   "memberId": "x406kqifmv9p66a7",
-   "monthKey": "2026-11",
-   "ts": 1792154998216,
-   "auto": true
-  }
- }
+ "transactions": {}
 }
