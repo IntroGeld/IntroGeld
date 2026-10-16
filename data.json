@@ -84,17 +84,6 @@
    "monthKey": "2026-11",
    "ts": 1792154998216,
    "auto": true
-  },
-  "cnpsa3ikmvaytbb9": {
-   "desc": "Contributie - Flore (november 2026)",
-   "type": "inkomst",
-   "amount": 35.26,
-   "date": "16-10-2026",
-   "iso": "2026-10-16",
-   "memberId": "bhd17rt7mv9p6qid",
-   "monthKey": "2026-11",
-   "ts": 1792154998917,
-   "auto": true
   }
  }
 }
