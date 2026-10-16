@@ -56,14 +56,5 @@
    "payments": {}
   }
  },
- "transactions": {
-  "80zxfckkmvayb9e8": {
-   "desc": "Rabobank",
-   "type": "inkomst",
-   "amount": 75,
-   "date": "16-10-2026",
-   "iso": "2026-10-16",
-   "ts": 1792154156624
-  }
- }
+ "transactions": {}
 }
