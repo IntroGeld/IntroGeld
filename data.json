@@ -62,5 +62,14 @@
    "payments": {}
   }
  },
- "transactions": {}
+ "transactions": {
+  "enta939wmve2laq8": {
+   "desc": "Rabo jongeren rekening",
+   "type": "inkomst",
+   "amount": 75,
+   "date": "18-10-2026",
+   "iso": "2026-10-18",
+   "ts": 1792342741904
+  }
+ }
 }
