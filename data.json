@@ -73,6 +73,17 @@
    "date": "18-10-2026",
    "iso": "2026-10-18",
    "ts": 1792342770661
+  },
+  "qo2naloomvnxwpov": {
+   "desc": "Contributie - Olivier (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "25-10-2026",
+   "iso": "2026-10-25",
+   "memberId": "7cwc82v0mv9p6cj3",
+   "monthKey": "2026-10",
+   "ts": 1792939538191,
+   "auto": true
   }
  }
 }
