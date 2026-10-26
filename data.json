@@ -86,6 +86,17 @@
    "monthKey": "2026-10",
    "ts": 1792939546935,
    "auto": true
+  },
+  "q8b0r0p8mvp8emau": {
+   "desc": "Contributie - Kaja (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "26-10-2026",
+   "iso": "2026-10-26",
+   "memberId": "0ti1m1ibmv9p6rh6",
+   "monthKey": "2026-10",
+   "ts": 1793017635942,
+   "auto": true
   }
  }
 }
