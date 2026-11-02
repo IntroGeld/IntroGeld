@@ -124,6 +124,17 @@
    "monthKey": "2026-10",
    "ts": 1793187716676,
    "auto": true
+  },
+  "yagcdp3amvzkk4mt": {
+   "desc": "Contributie - Tukkers (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "2-11-2026",
+   "iso": "2026-11-02",
+   "memberId": "2pg4dmjjmv9p6j9k",
+   "monthKey": "2026-10",
+   "ts": 1793642710133,
+   "auto": true
   }
  }
 }
