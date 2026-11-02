@@ -31,7 +31,9 @@
   "2pg4dmjjmv9p6j9k": {
    "name": "Tukkers",
    "anys": 0,
-   "payments": {}
+   "payments": {
+    "2026-10": 1
+   }
   },
   "1zswj2wsmv9p6n8n": {
    "name": "Mik",
