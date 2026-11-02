@@ -178,6 +178,17 @@
    "date": "2-11-2026",
    "iso": "2026-11-02",
    "ts": 1793654313736
+  },
+  "1k0lrnl8mvzs33d1": {
+   "desc": "Contributie - Hessel (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "2-11-2026",
+   "iso": "2026-11-02",
+   "memberId": "kgi8zamgmv9p691a",
+   "monthKey": "2026-10",
+   "ts": 1793655352261,
+   "auto": true
   }
  }
 }
