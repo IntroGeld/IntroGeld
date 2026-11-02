@@ -148,6 +148,14 @@
    "monthKey": "2026-10",
    "ts": 1793642719025,
    "auto": true
+  },
+  "9jnkznpkmvzkmv2i": {
+   "desc": "Mik Hes te weinig contributie",
+   "type": "inkomst",
+   "amount": 50.52,
+   "date": "2-11-2026",
+   "iso": "2026-11-02",
+   "ts": 1793642837706
   }
  }
 }
