@@ -181,6 +181,14 @@
    "monthKey": "2026-10",
    "ts": 1793655352261,
    "auto": true
+  },
+  "60q3jij3mvzs4unb": {
+   "desc": "25,26 van mik",
+   "type": "inkomst",
+   "amount": 25.26,
+   "date": "2-11-2026",
+   "iso": "2026-11-02",
+   "ts": 1793655434278
   }
  }
 }
