@@ -191,6 +191,17 @@
    "date": "2-11-2026",
    "iso": "2026-11-02",
    "ts": 1793655434278
+  },
+  "94ml8xc3mvzu2c4i": {
+   "desc": "Contributie - Mik (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "2-11-2026",
+   "iso": "2026-11-02",
+   "memberId": "1zswj2wsmv9p6n8n",
+   "monthKey": "2026-10",
+   "ts": 1793658676194,
+   "auto": true
   }
  }
 }
