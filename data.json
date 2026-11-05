@@ -202,6 +202,14 @@
    "date": "2-11-2026",
    "iso": "2026-11-02",
    "ts": 1793658697106
+  },
+  "k1o3f0nnmw3bfg9l": {
+   "desc": "Brit deel contributie",
+   "type": "inkomst",
+   "amount": 25.26,
+   "date": "5-11-2026",
+   "iso": "2026-11-05",
+   "ts": 1793869240089
   }
  }
 }
