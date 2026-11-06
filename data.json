@@ -212,6 +212,17 @@
    "date": "5-11-2026",
    "iso": "2026-11-05",
    "ts": 1793869240089
+  },
+  "rwcqpbgrmw4yqjal": {
+   "desc": "Contributie - Mariecke (oktober 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "6-11-2026",
+   "iso": "2026-11-06",
+   "memberId": "wivo2bj0mv9p6ykj",
+   "monthKey": "2026-10",
+   "ts": 1793968854572,
+   "auto": true
   }
  }
 }
