@@ -355,17 +355,6 @@
    "date": "24-11-2026",
    "iso": "2026-11-24",
    "ts": 1795522889761
-  },
-  "lri0rn9omwuocwbt": {
-   "desc": "Contributie - Kleijzen (november 2026)",
-   "type": "inkomst",
-   "amount": 35.26,
-   "date": "24-11-2026",
-   "iso": "2026-11-24",
-   "memberId": "wg58y1opmwt6gqug",
-   "monthKey": "2026-11",
-   "ts": 1795523542697,
-   "auto": true
   }
  }
 }
