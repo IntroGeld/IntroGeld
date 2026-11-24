@@ -425,6 +425,17 @@
    "date": "24-11-2026",
    "iso": "2026-11-24",
    "ts": 1795533791728
+  },
+  "9c0hp7vlmwuugpyh": {
+   "desc": "Contributie - Linde (november 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "24-11-2026",
+   "iso": "2026-11-24",
+   "memberId": "byjjmiqdmv9p74ka",
+   "monthKey": "2026-11",
+   "ts": 1795533798761,
+   "auto": true
   }
  }
 }
