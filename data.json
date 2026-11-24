@@ -462,6 +462,17 @@
    "date": "24-11-2026",
    "iso": "2026-11-24",
    "ts": 1795540385436
+  },
+  "doxrd86lmwv4x6i6": {
+   "desc": "Contributie - Leonie (november 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "24-11-2026",
+   "iso": "2026-11-24",
+   "memberId": "5ay6n46pmv9p7hyh",
+   "monthKey": "2026-11",
+   "ts": 1795551362862,
+   "auto": true
   }
  }
 }
