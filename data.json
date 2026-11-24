@@ -483,6 +483,17 @@
    "date": "24-11-2026",
    "iso": "2026-11-24",
    "ts": 1795551440432
+  },
+  "l8gu6yqmmwv5x4u1": {
+   "desc": "Contributie - van Middelkoop (november 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "24-11-2026",
+   "iso": "2026-11-24",
+   "memberId": "a1aux2z0mwt6gwcz",
+   "monthKey": "2026-11",
+   "ts": 1795553040313,
+   "auto": true
   }
  }
 }
