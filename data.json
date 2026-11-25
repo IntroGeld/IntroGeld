@@ -654,6 +654,17 @@
    "date": "25-11-2026",
    "iso": "2026-11-25",
    "ts": 1795609057913
+  },
+  "lbq6uyplmww39v59": {
+   "desc": "Contributie - Tycho (november 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "25-11-2026",
+   "iso": "2026-11-25",
+   "memberId": "4wrw7puumwt6jb02",
+   "monthKey": "2026-11",
+   "ts": 1795609061613,
+   "auto": true
   }
  }
 }
