@@ -605,6 +605,14 @@
    "monthKey": "2026-11",
    "ts": 1795605386855,
    "auto": true
+  },
+  "haoytma8mww1k59y": {
+   "desc": "Merch Jesper",
+   "type": "inkomst",
+   "amount": 57.67,
+   "date": "25-11-2026",
+   "iso": "2026-11-25",
+   "ts": 1795606182069
   }
  }
 }
