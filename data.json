@@ -665,6 +665,17 @@
    "monthKey": "2026-11",
    "ts": 1795609061613,
    "auto": true
+  },
+  "r3znfof0mww6bzd5": {
+   "desc": "Contributie - Imme (november 2026)",
+   "type": "inkomst",
+   "amount": 35.26,
+   "date": "25-11-2026",
+   "iso": "2026-11-25",
+   "memberId": "35qyjy5vmwt6gjh0",
+   "monthKey": "2026-11",
+   "ts": 1795614199241,
+   "auto": true
   }
  }
 }
