@@ -104,7 +104,9 @@
   "35qyjy5vmwt6gjh0": {
    "name": "Imme",
    "anys": 0,
-   "payments": {}
+   "payments": {
+    "2026-11": 1
+   }
   },
   "h0bm49vnmwt6glpi": {
    "name": "Jesper",
