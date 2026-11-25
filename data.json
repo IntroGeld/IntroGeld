@@ -634,6 +634,14 @@
    "monthKey": "2026-11",
    "ts": 1795606202547,
    "auto": true
+  },
+  "e3woee4cmww1rksc": {
+   "desc": "Merch Offenbeek",
+   "type": "inkomst",
+   "amount": 57.67,
+   "date": "25-11-2026",
+   "iso": "2026-11-25",
+   "ts": 1795606528764
   }
  }
 }
